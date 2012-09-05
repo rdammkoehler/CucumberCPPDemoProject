@@ -20,12 +20,9 @@ string reverseCharacters(string input, int stIdx, int edIdx)
   int len = edIdx - stIdx + 1;
     if ( 1 >= len )
     {
-      string tail = input.substr(stIdx, len);
-      return tail;
+      return input.substr(stIdx, len);
     }
-  string firstChar = input.substr(edIdx, 1);
-  string remainingChars = reverseCharacters( input, stIdx, edIdx - 1);
-  return firstChar + remainingChars;
+  return input.substr(edIdx, 1) + reverseCharacters( input, stIdx, edIdx - 1);
 }
 
 string reverseWords(string input)
