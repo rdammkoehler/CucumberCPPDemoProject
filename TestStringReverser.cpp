@@ -31,7 +31,6 @@ string reverseWords(string input)
   
   int initialIdx = 0;
   int spaceIdx = input.find_first_of(WHITESPACE, initialIdx);
-  string substr = input.substr(initialIdx, spaceIdx - initialIdx);
   accumulator.append(reverseCharacters(input, initialIdx, (-1 == spaceIdx) ? input.length() - 1: spaceIdx - 1));
 
   if ( -1 != spaceIdx )
