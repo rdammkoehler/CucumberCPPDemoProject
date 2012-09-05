@@ -17,32 +17,26 @@ const string WHITESPACE = SPACE + TAB + NEWLINE + CARRAIGE_RETURN + VERTICAL_TAB
 
 string reverseCharacters(string input, int stIdx, int edIdx)
 {
-  int len = edIdx - stIdx;
-  if ( 1 >= len )
+  int len = edIdx - stIdx + 1;
+    if ( 1 >= len )
     {
-      return input.substr(stIdx, edIdx);
+      string tail = input.substr(stIdx, len);
+      return tail;
     }
-  return input.substr(edIdx, 1) + reverseCharacters( input.substr(stIdx, edIdx), 0, len - 1 );
-}
-
-string reverseCharacters(string input)
-{
-  if ( 1 >= input.length() )
-    {
-      return input;
-    }
-  return input.substr(input.length()-1, 1) + reverseCharacters(input.substr(0, input.length()-1));
+  string firstChar = input.substr(edIdx, 1);
+  string remainingChars = reverseCharacters( input, stIdx, edIdx - 1);
+  return firstChar + remainingChars;
 }
 
 string reverseWords(string input)
 {
   string accumulator("");
- 
+  
   int initialIdx = 0;
   int spaceIdx = input.find_first_of(WHITESPACE, initialIdx);
   string substr = input.substr(initialIdx, spaceIdx - initialIdx);
-  accumulator.append(reverseCharacters(substr));
-  
+  accumulator.append(reverseCharacters(input, initialIdx, (-1 == spaceIdx) ? input.length() - 1: spaceIdx - 1));
+
   if ( -1 != spaceIdx )
     {
       accumulator.append(input.substr(spaceIdx,1));
@@ -54,11 +48,41 @@ string reverseWords(string input)
 
 string reverse(string input)
 {
-  return reverseWords(reverseCharacters(input));
+  return reverseWords(reverseCharacters(input, 0, input.length() -1 ));
+}
+
+// TESTS
+TEST(CharacterReverser, ReversesGivenStringWithIndexes)
+{
+  ASSERT_EQ("cba", reverseCharacters("abc", 0, 2));
+}
+
+TEST(CharacterReverser, FourCharReversesGivenStringWithIndexes)
+{
+  ASSERT_EQ("dcba", reverseCharacters("abcd", 0, 3));
+}
+
+TEST(CharacterReverser, TwoCharWithSpaceReversesGivenStringWithIndexes)
+{
+  ASSERT_EQ("d a", reverseCharacters("a d", 0, 2));
+}
+
+TEST(CharacterReverser, FourCharWithSpacesReversesGivenStringWithIndexes)
+{
+  ASSERT_EQ("d c b a", reverseCharacters("a b c d", 0, 6));
+}
+
+TEST(CharacterReverser, WorksOnAPartial) 
+{
+  ASSERT_EQ("defg", reverseCharacters("abcgfed",3, 6));
 }
 
 
-// TESTS
+TEST(CharacterReverser, SingleCharReversesGivenStringWithIndexes)
+{
+  ASSERT_EQ("a", reverseCharacters("a", 0, 1));
+}
+
 TEST(StringReverser, IsIdentityOperationOverEmptyString) 
 {
   ASSERT_EQ("", reverse("")) << "Empty string is not empty";
@@ -138,6 +162,4 @@ TEST(StringReverser, MultipleWhitespaceIsReversedWhitespace)
 {
   ASSERT_EQ(" \b\v\r\b\n\f\t ", reverse(" \t\f\n\b\r\v\b ")) << "Whitespaces were not reveresed";
 }
-
-
 
