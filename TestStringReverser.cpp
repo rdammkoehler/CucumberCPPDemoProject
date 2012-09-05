@@ -29,14 +29,13 @@ string reverseWords(string input)
 {
   string accumulator("");
   
-  int initialIdx = 0;
-  int spaceIdx = input.find_first_of(WHITESPACE, initialIdx);
-  accumulator.append(reverseCharacters(input, initialIdx, (-1 == spaceIdx) ? input.length() - 1: spaceIdx - 1));
+  int spaceIdx = input.find_first_of(WHITESPACE, 0);
+  accumulator.append(reverseCharacters(input, 0, (-1 == spaceIdx) ? input.length() - 1: spaceIdx - 1));
 
   if ( -1 != spaceIdx )
     {
       accumulator.append(input.substr(spaceIdx,1));
-      accumulator.append(reverseWords(input.substr(spaceIdx - initialIdx + 1)));
+      accumulator.append(reverseWords(input.substr(spaceIdx + 1)));
     }
   
   return accumulator;
