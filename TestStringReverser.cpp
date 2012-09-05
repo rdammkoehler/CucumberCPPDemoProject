@@ -1,5 +1,6 @@
 #include "gtest/gtest.h"
 #include <string>
+#include <iostream>
 
 using namespace std;
 
@@ -14,14 +15,23 @@ const string FORM_FEED = "\f";
 
 const string WHITESPACE = SPACE + TAB + NEWLINE + CARRAIGE_RETURN + VERTICAL_TAB + BACKSPACE + FORM_FEED;
 
+string reverseCharacters(string input, int stIdx, int edIdx)
+{
+  int len = edIdx - stIdx;
+  if ( 1 >= len )
+    {
+      return input.substr(stIdx, edIdx);
+    }
+  return input.substr(edIdx, 1) + reverseCharacters( input.substr(stIdx, edIdx), 0, len - 1 );
+}
+
 string reverseCharacters(string input)
 {
-  string rval = "";
-  for(int i = 0; i < input.length(); ++i)
+  if ( 1 >= input.length() )
     {
-      rval.insert(0, 1, input[i]);
+      return input;
     }
-  return rval;
+  return input.substr(input.length()-1, 1) + reverseCharacters(input.substr(0, input.length()-1));
 }
 
 string reverseWords(string input)
