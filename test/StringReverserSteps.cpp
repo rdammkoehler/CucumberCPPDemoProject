@@ -11,7 +11,7 @@ struct Context
   string output;
 };
 
-GIVEN("^Given a String Reverser$")
+GIVEN("^a String Reverser$")
 {
   USING_CONTEXT(Context, context);
   context->stringReverser = StringReverser();
