@@ -1,7 +1,7 @@
 ** WARNING **
 These instructions are still being tested and may contain errors or other issues.
 
-0) Assuming you have a text editor, cmake, make, g++, and git
+0) Assuming you have a curl, text editor, cmake, make, g++, and git
 
 1) Install Boost (sudo apt-get install libboost-all-dev)
 
