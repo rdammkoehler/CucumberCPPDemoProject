@@ -9,7 +9,7 @@ struct Context
 {
   StringReverser stringReverser;
   string output;
-}
+};
 
 GIVEN("^Given a String Reverser$")
 {
@@ -27,5 +27,6 @@ WHEN("^I reverse the string \"(.*)\"$")
 THEN("^the result is \"(.*)\"$")
 {
   REGEX_PARAM(string, expected);
+  USING_CONTEXT(Context, context);
   EXPECT_EQ(expected, context->output);
 }
