@@ -22,9 +22,7 @@ These instructions are still being tested and may contain errors or other issues
        gem install gherkin cucumber
        gem install rspec
 
-            # you may have difficultly with Ruby needing libyaml, if so do the following
-               sudo apt-get install libyaml-dev
-               rvm reinstall 1.9.3
+            # you may have difficultly with Ruby and fixing it is a REAL MESS -- figure out a clean way
 
 5) Download and compile Cucumber-CPP
     
