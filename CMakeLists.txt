@@ -15,5 +15,3 @@ find_package(GTest REQUIRED)
 include_directories(${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
 add_executable(TestStringReverser test/TestStringReverser.cpp)
 target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${GTEST_LIBRARIES} pthread )
-
-#WOOT, everything works up to this point.
