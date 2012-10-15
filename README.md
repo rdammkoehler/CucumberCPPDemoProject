@@ -1,11 +1,12 @@
 ** WARNING **
 These instructions are still being tested and may contain errors or other issues.
 
-#Assuming your starting from Ubuntu 10.04 i386 iso
+#Assuming you are starting from Ubuntu 10.04 i386 iso
 
-    http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/11.04/release/
-    
-    http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/11.04/release/ubuntu-11.04-dvd-i386.iso
+```
+http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/10.04/release/
+http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/10.04/release/ubuntu-10.04.4-dvd-i386.iso
+```
 
 #Assuming you have a curl, text editor, cmake, make, g++, and git
 
@@ -122,7 +123,7 @@ Your output should look like this;
 0m3.454s
 ```
         
-#vCreate your project
+# Create your project
 
 Create a project folder (MyProject)
 
