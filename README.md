@@ -31,8 +31,6 @@ Assuming your starting from Ubuntu 10.04 i386 iso
        gem install gherkin cucumber
        gem install rspec
 
-            # you may have difficultly with Ruby and fixing it is a REAL MESS -- figure out a clean way
-
 5) Download and compile Cucumber-CPP
     
     # Download from git
@@ -49,7 +47,7 @@ Assuming your starting from Ubuntu 10.04 i386 iso
 
     # Then test the cucumber build by attempting to run an example
         build/examples/Calc/GTestCalculatorSteps >/dev/null &
-        cucumber examples/Calc/CalcFeatures
+        cucumber -s examples/Calc/CalcFeatures
 
     # Your output should look like this;
 
