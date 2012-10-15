@@ -43,7 +43,7 @@ rvm install 1.9.3
 
 ```bash
 gem install gherkin cucumber
-gem install rspec
+source ~/.rvm/scripts/rvm
 ```
 
 # Download Cucumber-CPP
