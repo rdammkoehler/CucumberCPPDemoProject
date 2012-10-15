@@ -382,22 +382,15 @@ cd MyProject
 rm -Rf build
 cmake -E make_directory build
 cmake -E chdir build cmake ..
+cmake --build build
 ```
-
-Run make to compile and link your code
-
-```bash
-cd build
-make
-```
-
 # Running your tests
 
 Run the cucumber wire server 
 
 ```bash
-./StringReverserSteps &
-cucumber -s ../features
+./build/StringReverserSteps &
+cucumber -s features
 ```
 
 You output should look like this 
