@@ -1,5 +1,9 @@
-** WARNING **
-These instructions are still being tested and may contain errors or other issues.
+#What is this?
+This is a setup and build exercise for Cucumber-CPP on Ubuntu 10.04. It does not (yet) attempt to explain how to use Cucumber to do ATDD. You should be able to setup Cucumber-CPP and a simple test project using this information with little or no difficulty. 
+
+Soon, more stuff about what is ATDD, What is Cucumber, How does it all work? When should I do this? etc. will be added to this project.
+
+If you have any suggestions or comments, please let me know.
 
 #Assuming you are starting from Ubuntu 10.04 i386 iso
 
@@ -313,7 +317,7 @@ Create a 'wire' file for execution
 echo -e "host: localhost\nport: 3902" >> MyProject/features/myfeatures.wire
 ```
 
-Edit the CMakeLists.txt file and add the following
+Edit the *CMakeLists.txt* file and add the following
 
 ```cmake
 #get boost
@@ -334,7 +338,7 @@ add_executable(StringReverserSteps test/StringReverserSteps)
 target_link_libraries(StringReverserSteps StringReverser ${GTEST_LIBRARIES} pthread ${CUKE_LIBRARIES} ${CUKE_EXTRA_LIBRARIES})
 ```
 
-Create a steps file for the cumber wire server, put the following code in the file StringReverserSteps.cpp in the test folder
+Create a steps file for the cumber wire server, put the following code in the file *StringReverserSteps.cpp* in the test folder
 
 ```cpp
 #include <gtest/gtest.h>
