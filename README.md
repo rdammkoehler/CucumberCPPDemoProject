@@ -21,15 +21,19 @@ Assuming your starting from Ubuntu 10.04 i386 iso
 
 3) Install ruby and the appropriate gems
 
-    sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
-    curl -L https://get.rvm.io | bash -s stable --ruby
-    source ~/.bashrc
-    rvm install 1.9.3
+```bash
+sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
+curl -L https://get.rvm.io | bash -s stable --ruby
+source ~/.bashrc
+rvm install 1.9.3
+```
 
 4) Get the gems for cucumber
 
-    gem install gherkin cucumber
-    gem install rspec
+```bash
+gem install gherkin cucumber
+gem install rspec
+```
 
 5) Download Cucumber-CPP
 
@@ -173,66 +177,66 @@ Run the test suite
 
 Your output should look like this
 
-```gtest
-            Running main() from gtest_main.cc
-            [==========] Running 22 tests from 3 test cases.
-            [----------] Global test environment set-up.
-            [----------] 6 tests from CharacterReverser
-            [ RUN      ] CharacterReverser.ReversesGivenStringWithIndexes
-            [       OK ] CharacterReverser.ReversesGivenStringWithIndexes (0 ms)
-            [ RUN      ] CharacterReverser.FourCharReversesGivenStringWithIndexes
-            [       OK ] CharacterReverser.FourCharReversesGivenStringWithIndexes (0 ms)
-            [ RUN      ] CharacterReverser.TwoCharWithSpaceReversesGivenStringWithIndexes
-            [       OK ] CharacterReverser.TwoCharWithSpaceReversesGivenStringWithIndexes (0 ms)
-            [ RUN      ] CharacterReverser.FourCharWithSpacesReversesGivenStringWithIndexes
-            [       OK ] CharacterReverser.FourCharWithSpacesReversesGivenStringWithIndexes (0 ms)
-            [ RUN      ] CharacterReverser.WorksOnAPartial
-            [       OK ] CharacterReverser.WorksOnAPartial (0 ms)
-            [ RUN      ] CharacterReverser.SingleCharReversesGivenStringWithIndexes
-            [       OK ] CharacterReverser.SingleCharReversesGivenStringWithIndexes (0 ms)
-            [----------] 6 tests from CharacterReverser (0 ms total)
-            
-            [----------] 15 tests from StringReverser
-            [ RUN      ] StringReverser.IsIdentityOperationOverEmptyString
-            [       OK ] StringReverser.IsIdentityOperationOverEmptyString (0 ms)
-            [ RUN      ] StringReverser.IsIdentityOperationOverSingleCharacter
-            [       OK ] StringReverser.IsIdentityOperationOverSingleCharacter (0 ms)
-            [ RUN      ] StringReverser.ReversesCharactersSeperatedByWhiteSpace
-            [       OK ] StringReverser.ReversesCharactersSeperatedByWhiteSpace (0 ms)
-            [ RUN      ] StringReverser.ReversesCharacterPairsSeperatedByWhiteSpace
-            [       OK ] StringReverser.ReversesCharacterPairsSeperatedByWhiteSpace (0 ms)
-            [ RUN      ] StringReverser.AdjacentSpacesPreservedInOutput
-            [       OK ] StringReverser.AdjacentSpacesPreservedInOutput (0 ms)
-            [ RUN      ] StringReverser.LeadingSpaceBecomesTrailingSpace
-            [       OK ] StringReverser.LeadingSpaceBecomesTrailingSpace (0 ms)
-            [ RUN      ] StringReverser.TrailingSpaceBecomesLeadingSpace
-            [       OK ] StringReverser.TrailingSpaceBecomesLeadingSpace (0 ms)
-            [ RUN      ] StringReverser.IsIdentityOperationOverMulticharacterWord
-            [       OK ] StringReverser.IsIdentityOperationOverMulticharacterWord (0 ms)
-            [ RUN      ] StringReverser.TabIsWhitespaceToo
-            [       OK ] StringReverser.TabIsWhitespaceToo (0 ms)
-            [ RUN      ] StringReverser.NewlineIsWhitespaceToo
-            [       OK ] StringReverser.NewlineIsWhitespaceToo (0 ms)
-            [ RUN      ] StringReverser.CarriageReturnIsWhitespaceToo
-            [       OK ] StringReverser.CarriageReturnIsWhitespaceToo (0 ms)
-            [ RUN      ] StringReverser.VerticalTabIsWhitespaceToo
-            [       OK ] StringReverser.VerticalTabIsWhitespaceToo (0 ms)
-            [ RUN      ] StringReverser.BackspaceIsWhitespaceToo
-            [       OK ] StringReverser.BackspaceIsWhitespaceToo (0 ms)
-            [ RUN      ] StringReverser.FormFeedIsWhitespaceToo
-            [       OK ] StringReverser.FormFeedIsWhitespaceToo (0 ms)
-            [ RUN      ] StringReverser.MultipleWhitespaceIsReversedWhitespace
-            [       OK ] StringReverser.MultipleWhitespaceIsReversedWhitespace (0 ms)
-            [----------] 15 tests from StringReverser (0 ms total)
-            
-            [----------] 1 test from TripleWordStringReverser
-            [ RUN      ] TripleWordStringReverser.PutsLastWordFirstAndFirstWordLast
-            [       OK ] TripleWordStringReverser.PutsLastWordFirstAndFirstWordLast (0 ms)
-            [----------] 1 test from TripleWordStringReverser (0 ms total)
-            
-            [----------] Global test environment tear-down
-            [==========] 22 tests from 3 test cases ran. (0 ms total)
-            [  PASSED  ] 22 tests.
+```bash
+Running main() from gtest_main.cc
+[==========] Running 22 tests from 3 test cases.
+[----------] Global test environment set-up.
+[----------] 6 tests from CharacterReverser
+[ RUN      ] CharacterReverser.ReversesGivenStringWithIndexes
+[       OK ] CharacterReverser.ReversesGivenStringWithIndexes (0 ms)
+[ RUN      ] CharacterReverser.FourCharReversesGivenStringWithIndexes
+[       OK ] CharacterReverser.FourCharReversesGivenStringWithIndexes (0 ms)
+[ RUN      ] CharacterReverser.TwoCharWithSpaceReversesGivenStringWithIndexes
+[       OK ] CharacterReverser.TwoCharWithSpaceReversesGivenStringWithIndexes (0 ms)
+[ RUN      ] CharacterReverser.FourCharWithSpacesReversesGivenStringWithIndexes
+[       OK ] CharacterReverser.FourCharWithSpacesReversesGivenStringWithIndexes (0 ms)
+[ RUN      ] CharacterReverser.WorksOnAPartial
+[       OK ] CharacterReverser.WorksOnAPartial (0 ms)
+[ RUN      ] CharacterReverser.SingleCharReversesGivenStringWithIndexes
+[       OK ] CharacterReverser.SingleCharReversesGivenStringWithIndexes (0 ms)
+[----------] 6 tests from CharacterReverser (0 ms total)
+
+[----------] 15 tests from StringReverser
+[ RUN      ] StringReverser.IsIdentityOperationOverEmptyString
+[       OK ] StringReverser.IsIdentityOperationOverEmptyString (0 ms)
+[ RUN      ] StringReverser.IsIdentityOperationOverSingleCharacter
+[       OK ] StringReverser.IsIdentityOperationOverSingleCharacter (0 ms)
+[ RUN      ] StringReverser.ReversesCharactersSeperatedByWhiteSpace
+[       OK ] StringReverser.ReversesCharactersSeperatedByWhiteSpace (0 ms)
+[ RUN      ] StringReverser.ReversesCharacterPairsSeperatedByWhiteSpace
+[       OK ] StringReverser.ReversesCharacterPairsSeperatedByWhiteSpace (0 ms)
+[ RUN      ] StringReverser.AdjacentSpacesPreservedInOutput
+[       OK ] StringReverser.AdjacentSpacesPreservedInOutput (0 ms)
+[ RUN      ] StringReverser.LeadingSpaceBecomesTrailingSpace
+[       OK ] StringReverser.LeadingSpaceBecomesTrailingSpace (0 ms)
+[ RUN      ] StringReverser.TrailingSpaceBecomesLeadingSpace
+[       OK ] StringReverser.TrailingSpaceBecomesLeadingSpace (0 ms)
+[ RUN      ] StringReverser.IsIdentityOperationOverMulticharacterWord
+[       OK ] StringReverser.IsIdentityOperationOverMulticharacterWord (0 ms)
+[ RUN      ] StringReverser.TabIsWhitespaceToo
+[       OK ] StringReverser.TabIsWhitespaceToo (0 ms)
+[ RUN      ] StringReverser.NewlineIsWhitespaceToo
+[       OK ] StringReverser.NewlineIsWhitespaceToo (0 ms)
+[ RUN      ] StringReverser.CarriageReturnIsWhitespaceToo
+[       OK ] StringReverser.CarriageReturnIsWhitespaceToo (0 ms)
+[ RUN      ] StringReverser.VerticalTabIsWhitespaceToo
+[       OK ] StringReverser.VerticalTabIsWhitespaceToo (0 ms)
+[ RUN      ] StringReverser.BackspaceIsWhitespaceToo
+[       OK ] StringReverser.BackspaceIsWhitespaceToo (0 ms)
+[ RUN      ] StringReverser.FormFeedIsWhitespaceToo
+[       OK ] StringReverser.FormFeedIsWhitespaceToo (0 ms)
+[ RUN      ] StringReverser.MultipleWhitespaceIsReversedWhitespace
+[       OK ] StringReverser.MultipleWhitespaceIsReversedWhitespace (0 ms)
+[----------] 15 tests from StringReverser (0 ms total)
+
+[----------] 1 test from TripleWordStringReverser
+[ RUN      ] TripleWordStringReverser.PutsLastWordFirstAndFirstWordLast
+[       OK ] TripleWordStringReverser.PutsLastWordFirstAndFirstWordLast (0 ms)
+[----------] 1 test from TripleWordStringReverser (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 22 tests from 3 test cases ran. (0 ms total)
+[  PASSED  ] 22 tests.
 ```
 
 #Setting up Cucumber for Testing
@@ -248,121 +252,122 @@ Create a 'feature' file for the cucumer scenario(s)
 Add the following gherkin to the feature file
 
 ```gherkin
-            Feature: Reverse Words in a String
-              In order to read backwards
-              readers must have the words in their text reveresed
-            
-              Scenario: Empty String Reversal
-                Given a String Reverser
-                When I reverse the string ""
-                Then the result is ""
-            
-              Scenario: Single Character Reversal
-                Given a String Reverser
-                When I reverse the string "A"
-                Then the result is "A"
-            
-              Scenario: Multicharacter Word Reversal
-                Given a String Reverser
-                When I reverse the string "Bacon"
-                Then the result is "Bacon"
-            
-              Scenario: Multiword String Reversal
-                Given a String Reverser
-                When I reverse the string "Bacon is the life blood of Agile Software Development"
-                Then the result is "Development Software Agile of blood life the is Bacon"
-            
-              Scenario: Palindrome String Reversal
-                Given a String Reverser
-                When I reverse the string "Rats Live on no Evil Star"
-                Then the result is "Star Evil no on Live Rats"
+Feature: Reverse Words in a String
+  In order to read backwards
+  readers must have the words in their text reveresed
+
+  Scenario: Empty String Reversal
+    Given a String Reverser
+    When I reverse the string ""
+    Then the result is ""
+
+  Scenario: Single Character Reversal
+    Given a String Reverser
+    When I reverse the string "A"
+    Then the result is "A"
+
+  Scenario: Multicharacter Word Reversal
+    Given a String Reverser
+    When I reverse the string "Bacon"
+    Then the result is "Bacon"
+
+  Scenario: Multiword String Reversal
+    Given a String Reverser
+    When I reverse the string "Bacon is the life blood of Agile Software Development"
+    Then the result is "Development Software Agile of blood life the is Bacon"
+
+  Scenario: Palindrome String Reversal
+    Given a String Reverser
+    When I reverse the string "Rats Live on no Evil Star"
+    Then the result is "Star Evil no on Live Rats"
 ```
 
-    # create a 'wire' file for execution
+Create a 'wire' file for execution
 
-        echo -e "host: localhost\nport: 55555" >> MyProject/features/myfeatures.wire
+```bash
+echo -e "host: localhost\nport: 55555" >> MyProject/features/myfeatures.wire
+```
 
-    # edit the CMakeLists.txt file and add the following
+Edit the CMakeLists.txt file and add the following
 
-            #get boost
-            set(CUKE_CORE_BOOST_LIBS thread system regex date_time)
-            set(CUKE_DYNAMIC_BOOST_LIBS ${CUKE_CORE_BOOST_LIBS} ${CUKE_TEST_BOOST_LIBS})
-            set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBOOST_ALL_DYN_LINK")
-            set(Boost_USE_STATIC_LIBS OFF)
-            find_package(Boost COMPONENTS ${CUKE_DYNAMIC_BOOST_LIBS})
-            include_directories(${Boost_INCLUDE_DIRS})
-            set(CUKE_EXTRA_LIBRARIES ${CUKE_EXTRA_LIBRARIES} ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY} ${Boost_DATE_TIME_LIBRARY})
-            
-            #create the Cucumber wire-server to provied steps
-            set(CUKE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/../cucumber-cpp/include)
-            set(CUKE_LIBRARIES libcucumber-cpp.a)
-            link_directories(${CMAKE_SOURCE_DIR}/../cucumber-cpp/build/src)
-            include_directories(${CUKE_INCLUDE_DIRS})
-            add_executable(StringReverserSteps test/StringReverserSteps)
-            target_link_libraries(StringReverserSteps StringReverser ${GTEST_LIBRARIES} pthread ${CUKE_LIBRARIES} ${CUKE_EXTRA_LIBRARIES})
+```cmake
+#get boost
+set(CUKE_CORE_BOOST_LIBS thread system regex date_time)
+set(CUKE_DYNAMIC_BOOST_LIBS ${CUKE_CORE_BOOST_LIBS} ${CUKE_TEST_BOOST_LIBS})
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -DBOOST_ALL_DYN_LINK")
+set(Boost_USE_STATIC_LIBS OFF)
+find_package(Boost COMPONENTS ${CUKE_DYNAMIC_BOOST_LIBS})
+include_directories(${Boost_INCLUDE_DIRS})
+set(CUKE_EXTRA_LIBRARIES ${CUKE_EXTRA_LIBRARIES} ${Boost_THREAD_LIBRARY} ${Boost_SYSTEM_LIBRARY} ${Boost_REGEX_LIBRARY} ${Boost_DATE_TIME_LIBRARY})
 
-    # create a steps file for the cumber wire server
+#create the Cucumber wire-server to provied steps
+set(CUKE_INCLUDE_DIRS ${CMAKE_SOURCE_DIR}/../cucumber-cpp/include)
+set(CUKE_LIBRARIES libcucumber-cpp.a)
+link_directories(${CMAKE_SOURCE_DIR}/../cucumber-cpp/build/src)
+include_directories(${CUKE_INCLUDE_DIRS})
+add_executable(StringReverserSteps test/StringReverserSteps)
+target_link_libraries(StringReverserSteps StringReverser ${GTEST_LIBRARIES} pthread ${CUKE_LIBRARIES} ${CUKE_EXTRA_LIBRARIES})
+```
 
-        touch MyProject/test/StringReverserSteps.cpp
+Create a steps file for the cumber wire server, put the following code in the file StringReverserSteps.cpp in the test folder
 
-        # put the following code in the file
+```cpp
+#include <gtest/gtest.h>
+#include <cucumber-cpp/defs.hpp>
+#include <string>
+#include "StringReverser.h"
 
-            #include <gtest/gtest.h>
-            #include <cucumber-cpp/defs.hpp>
-            #include <string>
-            #include "StringReverser.h"
-            
-            using namespace std;
-            
-            struct Context
-            {
-              StringReverser stringReverser;
-              string output;
-            };
-            
-            GIVEN("^a String Reverser$")
-            {
-              USING_CONTEXT(Context, context);
-              context->stringReverser = StringReverser();
-            }
-            
-            WHEN("^I reverse the string \"(.*)\"$")
-            {
-              REGEX_PARAM(string, input);
-              USING_CONTEXT(Context, context);
-              context->output = context->stringReverser.reverse(input);
-            }
-            
-            THEN("^the result is \"(.*)\"$")
-            {
-              REGEX_PARAM(string, expected);
-              USING_CONTEXT(Context, context);
-              EXPECT_EQ(expected, context->output);
-            }
+using namespace std;
 
-    # run cmake
+struct Context
+{
+  StringReverser stringReverser;
+  string output;
+};
 
-        cd MyProject
+GIVEN("^a String Reverser$")
+{
+  USING_CONTEXT(Context, context);
+  context->stringReverser = StringReverser();
+}
 
-        rm -Rf build
+WHEN("^I reverse the string \"(.*)\"$")
+{
+  REGEX_PARAM(string, input);
+  USING_CONTEXT(Context, context);
+  context->output = context->stringReverser.reverse(input);
+}
 
-        cmake -E make_directory build
+THEN("^the result is \"(.*)\"$")
+{
+  REGEX_PARAM(string, expected);
+  USING_CONTEXT(Context, context);
+  EXPECT_EQ(expected, context->output);
+}
+```
 
-        cmake -E chdir build cmake ..
+Run cmake
 
-    # run make to compile and link your code
+```bash
+cd MyProject
+rm -Rf build
+cmake -E make_directory build
+cmake -E chdir build cmake ..
+```
 
-        cd build
+Run make to compile and link your code
 
-        make
+```bash
+cd build
+make
+```
 
-    # run the cucumber wire server 
+Run the cucumber wire server 
 
-        ./MyProject/build/StringReverserSteps &
-
-    # run the features file through cucumber
-
-        cucumber -s features
+```bash
+./MyProject/build/StringReverserSteps &
+cucumber -s features
+```
 
         # You output should be 
 
