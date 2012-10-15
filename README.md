@@ -34,12 +34,15 @@ Assuming your starting from Ubuntu 10.04 i386 iso
 5) Download Cucumber-CPP
 
 create a projects folder from your home directory
+
     mkdir projects
 
 change the current directory to your new projects directory
+
     cd projects
 
 use git to copy the cucumber project
+
     git clone https://github.com/cucumber/cucumber-cpp.git
 
 6) Compile Cucumber-CPP
