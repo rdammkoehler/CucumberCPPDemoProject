@@ -191,19 +191,13 @@ cd MyProject
 rm -Rf build
 cmake -E make_directory build
 cmake -E chdir build cmake ..
-```
-
-Run make to compile and link your code
-
-```bash
-cd build
-make
+cmake --build build
 ```
 
 Run the test suite
 
 ```bash
-./TestStringReverser
+./build/TestStringReverser
 ```
 
 Your output should look like this
