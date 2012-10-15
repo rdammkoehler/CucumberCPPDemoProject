@@ -50,40 +50,40 @@ Assuming your starting from Ubuntu 10.04 i386 iso
         cucumber -s examples/Calc/CalcFeatures
 
     # Your output should look like this;
-
-# language: en
-Feature: Addition
-  In order to avoid silly mistakes
-  As a math idiot 
-  I want to be told the sum of two numbers
-
-  Scenario Outline: Add two numbers                    # examples/Calc/CalcFeatures/features/addition.feature:7
-    Given I have entered <input_1> into the calculator # GTestCalculatorSteps.cpp:11
-    And I have entered <input_2> into the calculator   # GTestCalculatorSteps.cpp:11
-    When I press <button>                              # GTestCalculatorSteps.cpp:17
-    Then the result should be <output> on the screen   # GTestCalculatorSteps.cpp:27
-
-    Examples: 
-      | input_1 | input_2 | button | output |
-      | 20      | 30      | add    | 50     |
-      | 2       | 5       | add    | 7      |
-      | 0       | 40      | add    | 40     |
-
-# language: en
-Feature: Division
-  In order to avoid silly mistakes
-  Cashiers must be able to calculate a fraction
-
-  Scenario: Regular numbers                     # examples/Calc/CalcFeatures/features/division.feature:6
-    Given I have entered 3 into the calculator  # GTestCalculatorSteps.cpp:11
-    And I have entered 2 into the calculator    # GTestCalculatorSteps.cpp:11
-    When I press divide                         # GTestCalculatorSteps.cpp:22
-    Then the result should be 1.5 on the screen # GTestCalculatorSteps.cpp:27
-
-4 scenarios (4 passed)
-16 steps (16 passed)
-0m3.454s
-
+         
+        # language: en
+        Feature: Addition
+          In order to avoid silly mistakes
+          As a math idiot 
+          I want to be told the sum of two numbers
+        
+          Scenario Outline: Add two numbers                    # examples/Calc/CalcFeatures/features/addition.feature:7
+            Given I have entered <input_1> into the calculator # GTestCalculatorSteps.cpp:11
+            And I have entered <input_2> into the calculator   # GTestCalculatorSteps.cpp:11
+            When I press <button>                              # GTestCalculatorSteps.cpp:17
+            Then the result should be <output> on the screen   # GTestCalculatorSteps.cpp:27
+        
+            Examples: 
+              | input_1 | input_2 | button | output |
+              | 20      | 30      | add    | 50     |
+              | 2       | 5       | add    | 7      |
+              | 0       | 40      | add    | 40     |
+        
+        # language: en
+        Feature: Division
+          In order to avoid silly mistakes
+          Cashiers must be able to calculate a fraction
+        
+          Scenario: Regular numbers                     # examples/Calc/CalcFeatures/features/division.feature:6
+            Given I have entered 3 into the calculator  # GTestCalculatorSteps.cpp:11
+            And I have entered 2 into the calculator    # GTestCalculatorSteps.cpp:11
+            When I press divide                         # GTestCalculatorSteps.cpp:22
+            Then the result should be 1.5 on the screen # GTestCalculatorSteps.cpp:27
+        
+        4 scenarios (4 passed)
+        16 steps (16 passed)
+        0m3.454s
+        
 4) Create your project
 
     # create a project folder (MyProject)
