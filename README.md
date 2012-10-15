@@ -143,7 +143,7 @@ Create a source code folder
 mkdir MyProject/src
 ```
 
-Create a CMakeList.txt file in your MyProject folder using a text editor. The file should contain the following code;
+Create a *CMakeLists.txt* file in your MyProject folder using a text editor. The file should contain the following code;
 
 ```cmake
 cmake_minimum_required(VERSION 2.8)
@@ -155,7 +155,7 @@ add_library(StringReverser src/StringReverser.cpp)
 
 #setup testing environment
 enable_testing()
-set(GTEST_ROOT ${CMAKE_SOURCE_DIR}/../gtest-1.6.0)
+set(GTEST_ROOT /usr/lib)
 link_directories(${GTEST_ROOT})
 find_package(GTest REQUIRED)
 
@@ -178,7 +178,7 @@ Create code to pass the tests
 Copy the source code form github using curl
 
     curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.h > MyProject/src/StringReverser.h
-    curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.cpp > MyProject/test/StringReverser.cpp
+    curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.cpp > MyProject/src/StringReverser.cpp
 
 Run cmake
 
@@ -274,13 +274,7 @@ Create a feature sub-folder (features)
 mkdir MyProject/features
 ```
 
-Create a 'feature' file for the cucumer scenario(s)
-
-```bash
-touch MyProject/features/reverser.feature
-```
-
-Add the following gherkin to the feature file
+Create a 'feature' file for the cucumer scenario(s) called *reverser.feature* in the newly created features subdirectory. Then add the following gherkin to the feature file
 
 ```gherkin
 Feature: Reverse Words in a String
