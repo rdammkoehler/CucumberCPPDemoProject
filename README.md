@@ -1,18 +1,27 @@
 ** WARNING **
 These instructions are still being tested and may contain errors or other issues.
 
+Assuming your starting from Ubuntu 10.04 i386 iso
+
+    http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/11.04/release/
+    
+    http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/11.04/release/ubuntu-11.04-dvd-i386.iso
+
 0) Assuming you have a curl, text editor, cmake, make, g++, and git
 
-1) Install Boost (sudo apt-get install libboost-all-dev)
+    sudo apt-get install curl cmake make g++ git-core emacs
 
-2) Install GTest (sudo apt-get install liggtest-dev)
+1) Install Boost 
+
+    sudo apt-get install libboost-all-dev
+
+2) Install GTest 
+
+    sudo apt-get install liggtest-dev
 
 3) Install ruby and the appropriate gems
 
-    # Method 1: Use apt-get
-       sudo apt-get install ruby1.9
-
-    # Method 2: Use rvm
+       sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
        curl -L https://get.rvm.io | bash -s stable --ruby
        source ~/.bashrc
        rvm install 1.9.3
@@ -32,18 +41,50 @@ These instructions are still being tested and may contain errors or other issues
     # Change current directory
         cd cucumber-cpp.git
 
-    # Enable examples in the cucumber build
-        export CUKE_ENABLE_EXAMPLES=true
-
     # Build cucumber with the following commands
         cmake -E make_directory build
-        cmake -E chdir build cmake ..
+        cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on ..
         cmake --build build
         cmake --build build --target test
 
     # Then test the cucumber build by attempting to run an example
-        build/examples/Calc/CppSpecCalculatorSteps >/dev/null &
+        build/examples/Calc/GTestCalculatorSteps >/dev/null &
         cucumber examples/Calc/CalcFeatures
+
+    # Your output should look like this;
+
+# language: en
+Feature: Addition
+  In order to avoid silly mistakes
+  As a math idiot 
+  I want to be told the sum of two numbers
+
+  Scenario Outline: Add two numbers                    # examples/Calc/CalcFeatures/features/addition.feature:7
+    Given I have entered <input_1> into the calculator # GTestCalculatorSteps.cpp:11
+    And I have entered <input_2> into the calculator   # GTestCalculatorSteps.cpp:11
+    When I press <button>                              # GTestCalculatorSteps.cpp:17
+    Then the result should be <output> on the screen   # GTestCalculatorSteps.cpp:27
+
+    Examples: 
+      | input_1 | input_2 | button | output |
+      | 20      | 30      | add    | 50     |
+      | 2       | 5       | add    | 7      |
+      | 0       | 40      | add    | 40     |
+
+# language: en
+Feature: Division
+  In order to avoid silly mistakes
+  Cashiers must be able to calculate a fraction
+
+  Scenario: Regular numbers                     # examples/Calc/CalcFeatures/features/division.feature:6
+    Given I have entered 3 into the calculator  # GTestCalculatorSteps.cpp:11
+    And I have entered 2 into the calculator    # GTestCalculatorSteps.cpp:11
+    When I press divide                         # GTestCalculatorSteps.cpp:22
+    Then the result should be 1.5 on the screen # GTestCalculatorSteps.cpp:27
+
+4 scenarios (4 passed)
+16 steps (16 passed)
+0m3.454s
 
 4) Create your project
 
@@ -79,201 +120,20 @@ These instructions are still being tested and may contain errors or other issues
 
         mkdir MyProject/test
 
-    # create a the tests
+    # create the tests
+      copy the test code from github using curl
 
-        touch MyProject/test/TestStringReverser.cpp
+        curl https://raw.github.com/rdammkoehler/StringReverser/master/test/TestStringReverser.cpp > MyProject/test/TestStringReverser.cpp
 
-        # Put the following code in the file
-
-            #include "gtest/gtest.h"
-            #include <string>
-            #include "StringReverser.h"
-            
-            TEST(CharacterReverser, ReversesGivenStringWithIndexes)
-            {
-              ASSERT_EQ("cba", StringReverser().reverseCharacters("abc", 0, 2));
-            }
-            
-            TEST(CharacterReverser, FourCharReversesGivenStringWithIndexes)
-            {
-              ASSERT_EQ("dcba", StringReverser().reverseCharacters("abcd", 0, 3));
-            }
-            
-            TEST(CharacterReverser, TwoCharWithSpaceReversesGivenStringWithIndexes)
-            {
-              ASSERT_EQ("d a", StringReverser().reverseCharacters("a d", 0, 2));
-            }
-            
-            TEST(CharacterReverser, FourCharWithSpacesReversesGivenStringWithIndexes)
-            {
-              ASSERT_EQ("d c b a", StringReverser().reverseCharacters("a b c d", 0, 6));
-            }
-            
-            TEST(CharacterReverser, WorksOnAPartial) 
-            {
-              ASSERT_EQ("defg", StringReverser().reverseCharacters("abcgfed",3, 6));
-            }
-            
-            TEST(CharacterReverser, SingleCharReversesGivenStringWithIndexes)
-            {
-              ASSERT_EQ("a", StringReverser().reverseCharacters("a", 0, 1));
-            }
-            
-            TEST(StringReverser, IsIdentityOperationOverEmptyString) 
-            {
-              ASSERT_EQ("", StringReverser().reverse("")) << "Empty string is not empty";
-            }
-            
-            TEST(StringReverser, IsIdentityOperationOverSingleCharacter)
-            {
-              ASSERT_EQ("a", StringReverser().reverse("a")) << "Single Character string is not identity";
-            }
-            
-            TEST(StringReverser, ReversesCharactersSeperatedByWhiteSpace)
-            {
-              ASSERT_EQ("j i", StringReverser().reverse("i j")) << "Single Character Words not reversed";
-            }
-            
-            TEST(StringReverser, ReversesCharacterPairsSeperatedByWhiteSpace)
-            {
-              ASSERT_EQ("kl ij", StringReverser().reverse("ij kl")) << "Multicharacter Pairs Not Reversed";
-            }
-            
-            TEST(TripleWordStringReverser, PutsLastWordFirstAndFirstWordLast)
-            {
-              ASSERT_EQ("klmnop defghij abc", StringReverser().reverse("abc defghij klmnop")) << "First word is not last, or last word is not first. Or both.";
-            }
-            
-            TEST(StringReverser, AdjacentSpacesPreservedInOutput) 
-            {
-              ASSERT_EQ("xyzzy  lmnop", StringReverser().reverse("lmnop  xyzzy")) << "Adjacent Spaces should be preserved in output";
-            }
-            
-            TEST(StringReverser, LeadingSpaceBecomesTrailingSpace)
-            {
-              ASSERT_EQ("world hello ", StringReverser().reverse(" hello world")) << "Leading space should become trailing space";
-            }
-            
-            TEST(StringReverser, TrailingSpaceBecomesLeadingSpace)
-            {
-              ASSERT_EQ("  hello world", StringReverser().reverse("world hello  ")) << "Trailing space should become leading space";
-            }
-            
-            TEST(StringReverser, IsIdentityOperationOverMulticharacterWord)
-            {
-              ASSERT_EQ("xyzzy", StringReverser().reverse("xyzzy")) << "Multicharacter word is not identity";
-            }
-            
-            TEST(StringReverser, TabIsWhitespaceToo)
-            {
-              ASSERT_EQ("world\thello", StringReverser().reverse("hello\tworld")) << "Tabs should be treated like a whilspace";
-            }
-            
-            TEST(StringReverser, NewlineIsWhitespaceToo)
-            {
-              ASSERT_EQ("world\nhello", StringReverser().reverse("hello\nworld")) << "Newline should be treated like a whilspace";
-            }
-            
-            TEST(StringReverser, CarriageReturnIsWhitespaceToo)
-            {
-              ASSERT_EQ("world\rhello", StringReverser().reverse("hello\rworld")) << "Carriage Return should be treated like a whilspace";
-            }
-            
-            TEST(StringReverser, VerticalTabIsWhitespaceToo)
-            {
-              ASSERT_EQ("world\vhello", StringReverser().reverse("hello\vworld")) << "Vertical Tab should be treated like a whilspace";
-            }
-            
-            TEST(StringReverser, BackspaceIsWhitespaceToo)
-            {
-              ASSERT_EQ("world\bhello", StringReverser().reverse("hello\bworld")) << "Backspace should be treated like a whilspace";
-            }
-            
-            TEST(StringReverser, FormFeedIsWhitespaceToo)
-            {
-              ASSERT_EQ("world\fhello", StringReverser().reverse("hello\fworld")) << "Form Feed should be treated like a whilspace";
-            }
-            
-            TEST(StringReverser, MultipleWhitespaceIsReversedWhitespace)
-            {
-              ASSERT_EQ(" \b\v\r\b\n\f\t ", StringReverser().reverse(" \t\f\n\b\r\v\b ")) << "Whitespaces were not reveresed";
-            }
-            
     # create a source code folder
 
         mkdir MyProject/src
 
     # create code to pass the tests
+      copy the source code form github using curl
 
-        touch MyProject/src/StringReverser.h
-
-        # put the following code in the file
-
-            #ifndef STRING_REVERSER_H						
-            #define STRING_REVERSER_H						
-            #include <string>							
-            
-            using namespace std;
-            
-            class StringReverser							
-            {									
-             public:								
-              StringReverser() {}
-              ~StringReverser() {}
-              string reverseCharacters(string, int, int);
-              string reverseWords(string);
-              string reverse(string);
-            };									
-            
-            #endif
-
-        touch MyProject/src/StringReverser.cpp
-
-        # put the following code in the file
-
-            #include "StringReverser.h"
-            
-            using namespace std;							
-            
-            const string SPACE = " ";						
-            const string TAB = "\t";						
-            const string NEWLINE = "\n";						
-            const string CARRAIGE_RETURN = "\r";					
-            const string VERTICAL_TAB = "\v";					
-            const string BACKSPACE = "\b";						
-            const string FORM_FEED = "\f";						
-            const string WHITESPACE = SPACE + TAB + NEWLINE + CARRAIGE_RETURN + VERTICAL_TAB + BACKSPACE + FORM_FEED; 
-            
-            string StringReverser::reverseCharacters(string input, int stIdx, int edIdx)		
-              {									
-                int len = edIdx - stIdx + 1;						
-                if ( 1 >= len )							
-                  {									
-            	return input.substr(stIdx, len);					
-                  }									
-                return input.substr(edIdx, 1) + reverseCharacters( input, stIdx, edIdx - 1); 
-              }									
-              
-            string StringReverser::reverseWords(string input)					
-              {									
-                string accumulator("");						
-                
-                int spaceIdx = input.find_first_of(WHITESPACE, 0);			
-                accumulator.append(reverseCharacters(input, 0, (-1 == spaceIdx) ? input.length() - 1: spaceIdx - 1));	
-                
-                if ( -1 != spaceIdx )							
-                  {									
-            	accumulator.append(input.substr(spaceIdx,1));			
-            	accumulator.append(reverseWords(input.substr(spaceIdx + 1)));	
-                  }									
-                
-                return accumulator;							
-              }									
-              
-            string StringReverser::reverse(string input)						
-              {									
-                return reverseWords(reverseCharacters(input, 0, input.length() -1 ));	
-              }									
+        curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.h > MyProject/src/StringReverser.h
+        curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.cpp > MyProject/test/StringReverser.cpp
 
     # run cmake
 
