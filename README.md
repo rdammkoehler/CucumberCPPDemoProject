@@ -153,26 +153,27 @@ Copy the source code form github using curl
 
 Run cmake
 
-        cd MyProject
+```bash
+cd MyProject
+rm -Rf build
+cmake -E make_directory build
+cmake -E chdir build cmake ..
+```
 
-        rm -Rf build
+Run make to compile and link your code
 
-        cmake -E make_directory build
+```bash
+cd build
+make
+```
 
-        cmake -E chdir build cmake ..
+Run the test suite
 
-    # run make to compile and link your code
+    ./TestStringReverser
 
-        cd build
+Your output should look like this
 
-        make
-
-    # run the test suite
-
-        ./TestStringReverser
-
-        # Your output should look like this
-
+```gtest
             Running main() from gtest_main.cc
             [==========] Running 22 tests from 3 test cases.
             [----------] Global test environment set-up.
@@ -232,7 +233,8 @@ Run cmake
             [----------] Global test environment tear-down
             [==========] 22 tests from 3 test cases ran. (0 ms total)
             [  PASSED  ] 22 tests.
-            
+```
+
     # Setting up Cucumber for Testing
 
     # create a feature sub-folder (features)
@@ -245,6 +247,7 @@ Run cmake
 
         # add the following gherkin to the feature file
 
+```cucumber
             Feature: Reverse Words in a String
               In order to read backwards
               readers must have the words in their text reveresed
@@ -273,7 +276,8 @@ Run cmake
                 Given a String Reverser
                 When I reverse the string "Rats Live on no Evil Star"
                 Then the result is "Star Evil no on Live Rats"
-            
+```
+
     # create a 'wire' file for execution
 
         echo -e "host: localhost\nport: 55555" >> MyProject/features/myfeatures.wire
