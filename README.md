@@ -23,7 +23,7 @@ sudo apt-get install libboost-all-dev
 # Install GTest 
 
 ```bash
-sudo apt-get install liggtest-dev
+sudo apt-get install libgtest-dev
 ```
 
 # Install ruby and the appropriate gems
@@ -67,7 +67,7 @@ git clone https://github.com/cucumber/cucumber-cpp.git
 Change current directory
 
 ```bash
-cd cucumber-cpp.git
+cd cucumber-cpp
 ```
 
 Build cucumber with the following commands
