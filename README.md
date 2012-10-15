@@ -21,21 +21,28 @@ Assuming your starting from Ubuntu 10.04 i386 iso
 
 3) Install ruby and the appropriate gems
 
-       sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
-       curl -L https://get.rvm.io | bash -s stable --ruby
-       source ~/.bashrc
-       rvm install 1.9.3
+    sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
+    curl -L https://get.rvm.io | bash -s stable --ruby
+    source ~/.bashrc
+    rvm install 1.9.3
 
 4) Get the gems for cucumber
 
-       gem install gherkin cucumber
-       gem install rspec
+    gem install gherkin cucumber
+    gem install rspec
 
-5) Download and compile Cucumber-CPP
-    
-    # Download from git
-        git clone https://github.com/cucumber/cucumber-cpp.git
+5) Download Cucumber-CPP
 
+create a projects folder from your home directory
+    mkdir projects
+
+change the current directory to your new projects directory
+    cd projects
+
+use git to copy the cucumber project
+    git clone https://github.com/cucumber/cucumber-cpp.git
+
+6) Compile Cucumber-CPP
     # Change current directory
         cd cucumber-cpp.git
 
@@ -57,11 +64,11 @@ Assuming your starting from Ubuntu 10.04 i386 iso
           As a math idiot 
           I want to be told the sum of two numbers
         
-          Scenario Outline: Add two numbers                    # examples/Calc/CalcFeatures/features/addition.feature:7
-            Given I have entered <input_1> into the calculator # GTestCalculatorSteps.cpp:11
-            And I have entered <input_2> into the calculator   # GTestCalculatorSteps.cpp:11
-            When I press <button>                              # GTestCalculatorSteps.cpp:17
-            Then the result should be <output> on the screen   # GTestCalculatorSteps.cpp:27
+          Scenario Outline: Add two numbers                    
+            Given I have entered <input_1> into the calculator 
+            And I have entered <input_2> into the calculator   
+            When I press <button>                              
+            Then the result should be <output> on the screen   
         
             Examples: 
               | input_1 | input_2 | button | output |
@@ -74,11 +81,11 @@ Assuming your starting from Ubuntu 10.04 i386 iso
           In order to avoid silly mistakes
           Cashiers must be able to calculate a fraction
         
-          Scenario: Regular numbers                     # examples/Calc/CalcFeatures/features/division.feature:6
-            Given I have entered 3 into the calculator  # GTestCalculatorSteps.cpp:11
-            And I have entered 2 into the calculator    # GTestCalculatorSteps.cpp:11
-            When I press divide                         # GTestCalculatorSteps.cpp:22
-            Then the result should be 1.5 on the screen # GTestCalculatorSteps.cpp:27
+          Scenario: Regular numbers                     
+            Given I have entered 3 into the calculator  
+            And I have entered 2 into the calculator    
+            When I press divide                         
+            Then the result should be 1.5 on the screen 
         
         4 scenarios (4 passed)
         16 steps (16 passed)
