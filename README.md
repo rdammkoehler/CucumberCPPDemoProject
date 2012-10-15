@@ -308,7 +308,7 @@ Feature: Reverse Words in a String
 Create a 'wire' file for execution
 
 ```bash
-echo -e "host: localhost\nport: 3902" >> MyProject/features/myfeatures.wire
+echo -e "host: localhost\nport: 55555" >> MyProject/features/myfeatures.wire
 ```
 
 Edit the *CMakeLists.txt* file and add the following
@@ -383,7 +383,7 @@ cmake --build build
 Run the cucumber wire server 
 
 ```bash
-./build/StringReverserSteps &
+./build/StringReverserSteps 55555 &
 cucumber -s features
 ```
 
