@@ -235,19 +235,19 @@ Your output should look like this
             [  PASSED  ] 22 tests.
 ```
 
-    # Setting up Cucumber for Testing
+#Setting up Cucumber for Testing
 
-    # create a feature sub-folder (features)
+Create a feature sub-folder (features)
 
         mkdir MyProject/features
 
-    # create a 'feature' file for the cucumer scenario(s)
+Create a 'feature' file for the cucumer scenario(s)
 
         touch MyProject/features/reverser.feature
 
-        # add the following gherkin to the feature file
+Add the following gherkin to the feature file
 
-```cucumber
+```gherkin
             Feature: Reverse Words in a String
               In order to read backwards
               readers must have the words in their text reveresed
