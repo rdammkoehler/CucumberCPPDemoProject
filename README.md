@@ -132,6 +132,7 @@ Your output should look like this;
 Create a project folder (MyProject)
 
 ```bash
+cd ~/projects
 mkdir MyProject
 ```
 
@@ -269,6 +270,7 @@ Running main() from gtest_main.cc
 Create a feature sub-folder (features)
 
 ```bash
+cd ..
 mkdir MyProject/features
 ```
 
