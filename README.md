@@ -1,25 +1,31 @@
 ** WARNING **
 These instructions are still being tested and may contain errors or other issues.
 
-Assuming your starting from Ubuntu 10.04 i386 iso
+#Assuming your starting from Ubuntu 10.04 i386 iso
 
     http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/11.04/release/
     
     http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/11.04/release/ubuntu-11.04-dvd-i386.iso
 
-0) Assuming you have a curl, text editor, cmake, make, g++, and git
+#Assuming you have a curl, text editor, cmake, make, g++, and git
 
-    sudo apt-get install curl cmake make g++ git-core emacs
+```bash
+sudo apt-get install curl cmake make g++ git-core emacs
+```
 
-1) Install Boost 
+# Install Boost 
 
-    sudo apt-get install libboost-all-dev
+```bash
+sudo apt-get install libboost-all-dev
+```
 
-2) Install GTest 
+# Install GTest 
 
-    sudo apt-get install liggtest-dev
+```bash
+sudo apt-get install liggtest-dev
+```
 
-3) Install ruby and the appropriate gems
+# Install ruby and the appropriate gems
 
 ```bash
 sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
@@ -28,44 +34,56 @@ source ~/.bashrc
 rvm install 1.9.3
 ```
 
-4) Get the gems for cucumber
+# Get the gems for cucumber
 
 ```bash
 gem install gherkin cucumber
 gem install rspec
 ```
 
-5) Download Cucumber-CPP
+# Download Cucumber-CPP
 
 Create a projects folder from your home directory
 
-    mkdir projects
+```bash
+mkdir projects
+```
 
 Change the current directory to your new projects directory
 
-    cd projects
+```bash
+cd projects
+```
 
 Use git to copy the cucumber project
 
-    git clone https://github.com/cucumber/cucumber-cpp.git
+```bash
+git clone https://github.com/cucumber/cucumber-cpp.git
+```
 
-6) Compile Cucumber-CPP
+# Compile Cucumber-CPP
 
 Change current directory
 
-    cd cucumber-cpp.git
+```bash
+cd cucumber-cpp.git
+```
 
 Build cucumber with the following commands
-        
-    cmake -E make_directory build
-    cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on ..
-    cmake --build build
-    cmake --build build --target test
+  
+```bash      
+cmake -E make_directory build
+cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on ..
+cmake --build build
+cmake --build build --target test
+```
 
 Then test the cucumber build by attempting to run an example
 
-    build/examples/Calc/GTestCalculatorSteps >/dev/null &
-    cucumber -s examples/Calc/CalcFeatures
+```bash
+build/examples/Calc/GTestCalculatorSteps >/dev/null &
+cucumber -s examples/Calc/CalcFeatures
+```
 
 Your output should look like this;
 
@@ -104,19 +122,25 @@ Your output should look like this;
 0m3.454s
 ```
         
-4) Create your project
+#vCreate your project
 
 Create a project folder (MyProject)
 
-    mkdir MyProject
+```bash
+mkdir MyProject
+```
 
 Create a test code folder
 
-    mkdir MyProject/test
+```bash
+mkdir MyProject/test
+```
 
 Create a source code folder
 
-    mkdir MyProject/src
+```bash
+mkdir MyProject/src
+```
 
 Create a CMakeList.txt file in your MyProject folder using a text editor. The file should contain the following code;
 
@@ -173,7 +197,9 @@ make
 
 Run the test suite
 
-    ./TestStringReverser
+```bash
+./TestStringReverser
+```
 
 Your output should look like this
 
@@ -243,11 +269,15 @@ Running main() from gtest_main.cc
 
 Create a feature sub-folder (features)
 
-        mkdir MyProject/features
+```bash
+mkdir MyProject/features
+```
 
 Create a 'feature' file for the cucumer scenario(s)
 
-        touch MyProject/features/reverser.feature
+```bash
+touch MyProject/features/reverser.feature
+```
 
 Add the following gherkin to the feature file
 
@@ -362,6 +392,8 @@ cd build
 make
 ```
 
+# Running your tests
+
 Run the cucumber wire server 
 
 ```bash
@@ -369,37 +401,38 @@ Run the cucumber wire server
 cucumber -s features
 ```
 
-        # You output should be 
+You output should look like this 
+```bash
+Feature: Reverse Words in a String
+  In order to read backwards
+  readers must have the words in their text reveresed
 
-            Feature: Reverse Words in a String
-              In order to read backwards
-              readers must have the words in their text reveresed
-            
-              Scenario: Empty String Reversal
-                Given a String Reverser
-                When I reverse the string ""
-                Then the result is ""
-            
-              Scenario: Single Character Reversal
-                Given a String Reverser
-                When I reverse the string "A"
-                Then the result is "A"
-            
-              Scenario: Multicharacter Word Reversal
-                Given a String Reverser
-                When I reverse the string "Bacon"
-                Then the result is "Bacon"
-            
-              Scenario: Multiword String Reversal
-                Given a String Reverser
-                When I reverse the string "Bacon is the life blood of Agile Software Development"
-                Then the result is "Development Software Agile of blood life the is Bacon"
-            
-              Scenario: Palindrome String Reversal
-                Given a String Reverser
-                When I reverse the string "Rats Live on no Evil Star"
-                Then the result is "Star Evil no on Live Rats"
-            
-            5 scenarios (5 passed)
-            15 steps (15 passed)
-            0m3.128s
+  Scenario: Empty String Reversal
+    Given a String Reverser
+    When I reverse the string ""
+    Then the result is ""
+
+  Scenario: Single Character Reversal
+    Given a String Reverser
+    When I reverse the string "A"
+    Then the result is "A"
+
+  Scenario: Multicharacter Word Reversal
+    Given a String Reverser
+    When I reverse the string "Bacon"
+    Then the result is "Bacon"
+
+  Scenario: Multiword String Reversal
+    Given a String Reverser
+    When I reverse the string "Bacon is the life blood of Agile Software Development"
+    Then the result is "Development Software Agile of blood life the is Bacon"
+
+  Scenario: Palindrome String Reversal
+    Given a String Reverser
+    When I reverse the string "Rats Live on no Evil Star"
+    Then the result is "Star Evil no on Live Rats"
+
+5 scenarios (5 passed)
+15 steps (15 passed)
+0m3.128s
+```
