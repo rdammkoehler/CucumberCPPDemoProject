@@ -33,33 +33,37 @@ Assuming your starting from Ubuntu 10.04 i386 iso
 
 5) Download Cucumber-CPP
 
-create a projects folder from your home directory
+Create a projects folder from your home directory
 
     mkdir projects
 
-change the current directory to your new projects directory
+Change the current directory to your new projects directory
 
     cd projects
 
-use git to copy the cucumber project
+Use git to copy the cucumber project
 
     git clone https://github.com/cucumber/cucumber-cpp.git
 
 6) Compile Cucumber-CPP
-    # Change current directory
-        cd cucumber-cpp.git
 
-    # Build cucumber with the following commands
-        cmake -E make_directory build
-        cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on ..
-        cmake --build build
-        cmake --build build --target test
+Change current directory
 
-    # Then test the cucumber build by attempting to run an example
-        build/examples/Calc/GTestCalculatorSteps >/dev/null &
-        cucumber -s examples/Calc/CalcFeatures
+    cd cucumber-cpp.git
 
-    # Your output should look like this;
+Build cucumber with the following commands
+        
+    cmake -E make_directory build
+    cmake -E chdir build cmake -DCUKE_ENABLE_EXAMPLES=on ..
+    cmake --build build
+    cmake --build build --target test
+
+Then test the cucumber build by attempting to run an example
+
+    build/examples/Calc/GTestCalculatorSteps >/dev/null &
+    cucumber -s examples/Calc/CalcFeatures
+
+Your output should look like this;
          
         # language: en
         Feature: Addition
@@ -96,54 +100,56 @@ use git to copy the cucumber project
         
 4) Create your project
 
-    # create a project folder (MyProject)
+Create a project folder (MyProject)
 
-        mkdir MyProject
+    mkdir MyProject
 
-    # create a CMakeList.txt file
+Create a test code folder
 
-        echo "cmake_minimum_required(VERSION 2.8)" >> MyProject/CMakeLists.txt
+    mkdir MyProject/test
 
-    # add enough code to the cmake file to build your test code
+Create a source code folder
 
-        project(StringReverser)
+    mkdir MyProject/src
 
-        #create a library from our code
-        add_library(StringReverser src/StringReverser.cpp)
+Create a CMakeList.txt file in your MyProject folder using a text editor. The file should contain the following code;
 
-        #setup testing environment
-        enable_testing()
-        set(GTEST_ROOT ${CMAKE_SOURCE_DIR}/../gtest-1.6.0)
-        link_directories(${GTEST_ROOT})
-        find_package(GTest REQUIRED)
+```cmake
+cmake_minimum_required(VERSION 2.8)
 
-        #create a test executable linked to our code
-        include_directories(${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
-        add_executable(TestStringReverser test/TestStringReverser.cpp)
-        target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${GTEST_LIBRARIES} pthread)
+project(StringReverser)
 
-    # Test Drive a StringReverser, put the source code in the src folder and the test code in the test folder
+#create a library from our code
+add_library(StringReverser src/StringReverser.cpp)
 
-    # create a test code folder
+#setup testing environment
+enable_testing()
+set(GTEST_ROOT ${CMAKE_SOURCE_DIR}/../gtest-1.6.0)
+link_directories(${GTEST_ROOT})
+find_package(GTest REQUIRED)
 
-        mkdir MyProject/test
+#create a test executable linked to our code
+include_directories(${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
+add_executable(TestStringReverser test/TestStringReverser.cpp)
+target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${GTEST_LIBRARIES} pthread)
+```
 
-    # create the tests
-      copy the test code from github using curl
+Test Drive a StringReverser, put the source code in the src folder and the test code in the test folder. Optionally you can download the source code from the github project folder.
 
-        curl https://raw.github.com/rdammkoehler/StringReverser/master/test/TestStringReverser.cpp > MyProject/test/TestStringReverser.cpp
+Create the tests
+      
+Copy the test code from github using curl
 
-    # create a source code folder
+    curl https://raw.github.com/rdammkoehler/StringReverser/master/test/TestStringReverser.cpp > MyProject/test/TestStringReverser.cpp
 
-        mkdir MyProject/src
+Create code to pass the tests
 
-    # create code to pass the tests
-      copy the source code form github using curl
+Copy the source code form github using curl
 
-        curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.h > MyProject/src/StringReverser.h
-        curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.cpp > MyProject/test/StringReverser.cpp
+    curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.h > MyProject/src/StringReverser.h
+    curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.cpp > MyProject/test/StringReverser.cpp
 
-    # run cmake
+Run cmake
 
         cd MyProject
 
