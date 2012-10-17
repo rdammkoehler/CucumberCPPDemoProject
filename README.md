@@ -17,8 +17,10 @@ http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/10.04/release/ubuntu-10.04.4-dv
 
 #Assuming you have a curl, text editor, cmake, make, g++, and git
 
+I've left the editor install out. I prefer emacs, you may choose some other tool.
+
 ```bash
-sudo apt-get install curl cmake make g++ git-core emacs
+sudo apt-get install curl cmake make g++ git-core
 ```
 
 # Install Boost 
@@ -172,6 +174,21 @@ include_directories(${GTEST_INCLUDE_DIR} ${CMAKE_SOURCE_DIR}/src)
 add_executable(TestStringReverser test/TestStringReverser.cpp)
 target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${GTEST_LIBRARIES} pthread)
 ```
+
+> #What does that CMakeLists.txt file do?
+>
+> The important (irregular) part is setting up your testing environment.
+> For our purposes we use GoogleTest http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCAQFjAA&url=http%3A%2F%2Fcode.google.com%2Fp%2Fgoogletest%2F&ei=Wg1_UIFUyJvIAYiAgZAJ&usg=AFQjCNFzFRdftgqf2liiAPhuxnsOJqxnLA
+> We installed Google test using apt-get and it placed our library in /usr/lib
+> First off, add GTest to our link directories (link_directories...)
+> *** As it turns out, this next bit might not be necessary or useful ***
+> Using find_package(GTest REQUIRED) we've told CMake to go look for Google
+> Test and if it isn't found, stop.
+> *** end possibly useless part ***
+> Then add the include directories for Google Test along with our own source code
+> Finally create an executable called TestStringReverser using our TestStringReverser.cpp file and then
+> Add link librarires for the executable including Google Test's main library
+>
 
 Test Drive a StringReverser, put the source code in the src folder and the test code in the test folder. Optionally you can download the source code from the github project folder.
 
