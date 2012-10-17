@@ -5,6 +5,9 @@ Soon, more stuff about what is ATDD, What is Cucumber, How does it all work? Whe
 
 If you have any suggestions or comments, please let me know.
 
+#Notice: Ubuntu 12.04
+I've just received comments that this is *not* working on Ubuntu 12.04. I'll work out the why and update soon on that topic.
+
 #Assuming you are starting from Ubuntu 10.04 i386 iso
 
 ```
