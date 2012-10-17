@@ -178,15 +178,25 @@ target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${
 > #What does that CMakeLists.txt file do?
 >
 > The important (irregular) part is setting up your testing environment.
+>
 > For our purposes we use GoogleTest http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCAQFjAA&url=http%3A%2F%2Fcode.google.com%2Fp%2Fgoogletest%2F&ei=Wg1_UIFUyJvIAYiAgZAJ&usg=AFQjCNFzFRdftgqf2liiAPhuxnsOJqxnLA
+>
 > We installed Google test using apt-get and it placed our library in /usr/lib
+>
 > First off, add GTest to our link directories (link_directories...)
+>
 > *** As it turns out, this next bit might not be necessary or useful ***
+>
 > Using find_package(GTest REQUIRED) we've told CMake to go look for Google
+>
 > Test and if it isn't found, stop.
+>
 > *** end possibly useless part ***
+>
 > Then add the include directories for Google Test along with our own source code
+>
 > Finally create an executable called TestStringReverser using our TestStringReverser.cpp file and then
+>
 > Add link librarires for the executable including Google Test's main library
 >
 
