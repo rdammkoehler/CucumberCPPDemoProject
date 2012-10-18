@@ -584,13 +584,33 @@ Feature: Reverse Words in a String
 ```
 
 # More Information
+
 Cucumber: http://cukes.info/
+
 Cucumber CPP: https://github.com/cucumber/cucumber-cpp
+
 Cucumber Book: http://pragprog.com/book/hwcuc/the-cucumber-book
+
+Gherkin: http://docs.behat.org/guides/1.gherkin.html
+
+RVM: https://rvm.io/
+
+Ruby: http://www.ruby-lang.org/en/
+
 Google Test: http://code.google.com/p/googletest/
+
 Boost: http://www.boost.org/
+
 CMake: http://www.cmake.org/
+
+github: https://github.com/
+
+git: http://git-scm.com/
+
 Ubuntu: http://www.ubuntu.com/
+
 Apt-Get How To: https://help.ubuntu.com/8.04/serverguide/apt-get.html
+
 Emacs: http://www.gnu.org/software/emacs/
+
 VIM: http://www.vim.org/
