@@ -183,15 +183,11 @@ target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${
 >
 > We installed Google test using apt-get and it placed our library in /usr/lib
 >
-> First off, add GTest to our link directories (link_directories...)
->
-> *** As it turns out, this next bit might not be necessary or useful ***
+> First off, add GTest to our link directories (link_directories...) [not strictly necessary unless the location is not */usr/lib*
 >
 > Using find_package(GTest REQUIRED) we've told CMake to go look for Google
 >
 > Test and if it isn't found, stop.
->
-> *** end possibly useless part ***
 >
 > Then add the include directories for Google Test along with our own source code
 >
@@ -363,6 +359,29 @@ include_directories(${CUKE_INCLUDE_DIRS})
 add_executable(StringReverserSteps test/StringReverserSteps)
 target_link_libraries(StringReverserSteps StringReverser ${GTEST_LIBRARIES} pthread ${CUKE_LIBRARIES} ${CUKE_EXTRA_LIBRARIES})
 ```
+
+> #What does that CMake stuff do?
+>
+> Configure the location ofthe Boost libriaries, both static and dynamic
+>
+> Set some linker flags for using Boost
+>
+> Turn Static Boost libraries off
+>
+> Add the Boost include libraries to the include path for the compiler
+>
+> Add the Boost libriaries into the extra libs path for compilation
+>
+> Identify the location of the Cucumber-CPP include files
+>
+> Identify the location of the Cucumber-CPP libriaries
+>
+> Add the cucumber libriaries into the linker path
+>
+> Create an executable called StirngReverserSteps from our Steps code
+>
+> Link the StringReverserSteps executable with Google Test, Cucumber, and implicitly Boost via the CUKE_EXTRA_LIBRARIES variable
+>
 
 Create a steps file for the cumber wire server, put the following code in the file *StringReverserSteps.cpp* in the test folder
 
