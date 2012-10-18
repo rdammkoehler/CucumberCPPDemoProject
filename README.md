@@ -15,27 +15,54 @@ http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/10.04/release/
 http://mirror.anl.gov/pub/ubuntu-iso/DVDs/ubuntu/10.04/release/ubuntu-10.04.4-dvd-i386.iso
 ```
 
-#Assuming you have a curl, text editor, cmake, make, g++, and git
+#Setup the development environment
 
-I've left the editor install out. I prefer emacs, you may choose some other tool.
+##Install curl, a text editor, cmake, make, g++, and git
+
+>
+> I've left the editor install out. I prefer emacs, you may choose some other tool.
+>
+> For example you could use;
+> 
+> sudo apt-get install emacs
+>
+> *OR*
+>
+> sudo apt-get install vim
+>
+> *OR*
+>
+> use gedit which should already be available in your applications menu
+>
 
 ```bash
 sudo apt-get install curl cmake make g++ git-core
 ```
 
-# Install Boost 
+## Install Boost 
 
 ```bash
 sudo apt-get install libboost-all-dev
 ```
+>
+> The boost libraries are necessary for the cucmber-cpp implementation. 
+> While a more concise subset of the boost libraries is required, it is easiest to just
+> install them all
+>
 
-# Install GTest 
+## Install GTest 
 
 ```bash
 sudo apt-get install libgtest-dev
 ```
 
-# Install ruby and the appropriate gems
+>
+> There are alaternatives here, however GTest provides a simple set of assertion macros that can
+> be used in the step files. Boost also provides a set of assertion classes, as does CPPSPEC. We
+> don't use CPPSPEC because no documentation is available (due to link rot). 
+>
+
+## Install ruby and the appropriate gems
 
 ```bash
 sudo apt-get install zlib1g zlib1g-dev libyaml-0-2 libyaml-dev
@@ -44,34 +71,47 @@ source ~/.bashrc
 rvm install 1.9.3
 ```
 
-# Get the gems for cucumber
+>
+> Cucumber comes to us from the Ruby world. Cucmber-CPP works with Cucumber via the *wire protocol*. 
+> So in order to make this all work we need the Ruby part of Cucumber to execute our feature files. 
+> Here is a short description of the way the wire protocol works; https://github.com/cucumber/cucumber/wiki/Wire-Protocol
+>
+
+## Get the gems for cucumber
 
 ```bash
 gem install gherkin cucumber
 source ~/.rvm/scripts/rvm
 ```
 
-# Download Cucumber-CPP
+>
+> Gems are a Ruby technology that allow you to pull in modules of code from other sources. In this case
+> we are pulling in gherkin and cucumber. Here ***the orderder is important*** so be sure to pull gherkin
+> first. Gherkin is the interpreter for your feature files. Cucumber uses this to read and execute the steps
+> you have defined in a scenario. Cucumber is the test execution engine. It also creates the output.
+>
 
-Create a projects folder from your home directory
+## Download Cucumber-CPP
+
+###Create a projects folder from your home directory
 
 ```bash
 mkdir projects
 ```
 
-Change the current directory to your new projects directory
+###Change the current directory to your new projects directory
 
 ```bash
 cd projects
 ```
 
-Use git to copy the cucumber project
+###Use git to copy the cucumber project
 
 ```bash
 git clone https://github.com/cucumber/cucumber-cpp.git
 ```
 
-# Compile Cucumber-CPP
+### Compile Cucumber-CPP
 
 Change current directory
 
@@ -88,12 +128,39 @@ cmake --build build
 cmake --build build --target test
 ```
 
-Then test the cucumber build by attempting to run an example
+>
+> ***Note*** You should see some warnings, but no errors at this point. If you see a warning that Google Test (GTEST) was *not* found, the following step(s) will fail. Go back and check to see that Google Test was installed correctly. You can do this by looking for the following information;
+>
+> 1. You have the binary librarires for Google Test in */usr/lib*
+>    1.1. 
+>    1.1. /usr/lib/libgtest.a
+>    1.1. /usr/lib/libgtest.la
+>    1.1. /usr/lib/libgtest_main.a
+>    1.1. /usr/lib/libgtest_main.la
+>    1.1. /usr/lib/libgtest_main.so
+>    1.1. /usr/lib/libgtest_main.so.0
+>    1.1. /usr/lib/libgtest_main.so.0.0.0
+>    1.1. /usr/lib/libgtest.so
+>    1.1. /usr/lib/libgtest.so.0
+>    1.1. /usr/lib/libgtest.so.0.0.0 
+> 1. You have the include headers for Google Test in */usr/include/gtest*
+>
+> If these conditions are not true, go back and check what happened when you ran *sudo apt-get install libgtest-dev*
+>
+> ***Note:*** we know this isn't working correctly on Ubuntu 12.04 at this time.
+
+##Test cucumber 
+
+###Run an example
 
 ```bash
 build/examples/Calc/GTestCalculatorSteps >/dev/null &
 cucumber -s examples/Calc/CalcFeatures
 ```
+
+>
+> **Note:** The -s flag disables source line reporting in the output. You can try this command without the -s and see that each line of the feature file is reported next to its output. I find that annoying, so I surpress that part of the output.
+>
 
 Your output should look like this;
 
@@ -134,26 +201,30 @@ Your output should look like this;
         
 # Create your project
 
-Create a project folder (MyProject)
+Here we are creating a new project that uses Cucumber-CPP. The point is not about learning C++, but rather how to setup your project to use Cucumber. You won't need to write any actual C++ code, you can just copy it from various locations on the web (this repo) and copy-paste it from this README.md file. In real life I don't recommend copy-paste approach. But for expedience I'm using that approach here. 
+
+##Create a project folder (MyProject)
 
 ```bash
 cd ~/projects
 mkdir MyProject
 ```
 
-Create a test code folder
+###Create a test code folder
 
 ```bash
 mkdir MyProject/test
 ```
 
-Create a source code folder
+###Create a source code folder
 
 ```bash
 mkdir MyProject/src
 ```
 
-Create a *CMakeLists.txt* file in your MyProject folder using a text editor. The file should contain the following code;
+##Create a *CMakeLists.txt* file
+
+In your MyProject folder using a text editor. The file should contain the following code;
 
 ```cmake
 cmake_minimum_required(VERSION 2.8)
@@ -179,11 +250,12 @@ target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${
 >
 > The important (irregular) part is setting up your testing environment.
 >
-> For our purposes we use GoogleTest http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCAQFjAA&url=http%3A%2F%2Fcode.google.com%2Fp%2Fgoogletest%2F&ei=Wg1_UIFUyJvIAYiAgZAJ&usg=AFQjCNFzFRdftgqf2liiAPhuxnsOJqxnLA
+> For our purposes we use GoogleTest 
+> http://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&ved=0CCAQFjAA&url=http%3A%2F%2Fcode.google.com%2Fp%2Fgoogletest%2F&ei=Wg1_UIFUyJvIAYiAgZAJ&usg=AFQjCNFzFRdftgqf2liiAPhuxnsOJqxnLA
 >
 > We installed Google test using apt-get and it placed our library in /usr/lib
 >
-> First off, add GTest to our link directories (link_directories...) [not strictly necessary unless the location is not */usr/lib*
+> First off, add GTest to our link directories (link_directories...) [not strictly necessary unless the location is not */usr/lib*]
 >
 > Using find_package(GTest REQUIRED) we've told CMake to go look for Google
 >
@@ -196,22 +268,24 @@ target_link_libraries(TestStringReverser StringReverser ${GTEST_MAIN_LIBRARY} ${
 > Add link librarires for the executable including Google Test's main library
 >
 
-Test Drive a StringReverser, put the source code in the src folder and the test code in the test folder. Optionally you can download the source code from the github project folder.
+#Test Drive a StringReverser
 
-Create the tests
+Put the source code in the src folder and the test code in the test folder. Optionally you can download the source code from the github project folder.
+
+##Create the tests
       
-Copy the test code from github using curl
+###Copy the test code from github using curl
 
     curl https://raw.github.com/rdammkoehler/StringReverser/master/test/TestStringReverser.cpp > MyProject/test/TestStringReverser.cpp
 
-Create code to pass the tests
+##Create code to pass the tests
 
-Copy the source code form github using curl
+###Copy the source code form github using curl
 
     curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.h > MyProject/src/StringReverser.h
     curl https://raw.github.com/rdammkoehler/StringReverser/master/src/StringReverser.cpp > MyProject/src/StringReverser.cpp
 
-Run cmake
+##Run cmake
 
 ```bash
 cd MyProject
@@ -221,7 +295,9 @@ cmake -E chdir build cmake ..
 cmake --build build
 ```
 
-Run the test suite
+##Run the test suite
+
+Before we proceed we should make sure the code we just compiled actually works. So lets run the tests to make sure.
 
 ```bash
 ./build/TestStringReverser
@@ -293,14 +369,16 @@ Running main() from gtest_main.cc
 
 #Setting up Cucumber for Testing
 
-Create a feature sub-folder (features)
+##Create a feature sub-folder (features)
 
 ```bash
 cd ..
 mkdir MyProject/features
 ```
 
-Create a 'feature' file for the cucumer scenario(s) called *reverser.feature* in the newly created features subdirectory. Then add the following gherkin to the feature file
+##Create a 'feature' 
+
+Create a file for the cucumer scenario(s) called *reverser.feature* in the newly created features subdirectory. Then add the following gherkin to the feature file
 
 ```gherkin
 Feature: Reverse Words in a String
@@ -333,11 +411,18 @@ Feature: Reverse Words in a String
     Then the result is "Star Evil no on Live Rats"
 ```
 
-Create a 'wire' file for execution
+##Create a 'wire' file 
 
 ```bash
 echo -e "host: localhost\nport: 55555" >> MyProject/features/myfeatures.wire
 ```
+
+>
+> Cucumber uses this file to determine where to connect for test execution. The file can be *anywhere* inside the directory structure that contains your
+> feature. There should be only one of these files. The host is the machine that is running your cucumber-cpp application (we'll build that in a minute) 
+> and the port is the TCP port that the cucumber-cpp application is listening on. This number *must*match* the argument passed into the cucumber-cpp 
+> application. Otherwise cucumber won't be able to find the steps and execution will fail.  
+>
 
 Edit the *CMakeLists.txt* file and add the following
 
@@ -383,6 +468,8 @@ target_link_libraries(StringReverserSteps StringReverser ${GTEST_LIBRARIES} pthr
 > Link the StringReverserSteps executable with Google Test, Cucumber, and implicitly Boost via the CUKE_EXTRA_LIBRARIES variable
 >
 
+##Create a steps file 
+
 Create a steps file for the cumber wire server, put the following code in the file *StringReverserSteps.cpp* in the test folder
 
 ```cpp
@@ -420,7 +507,19 @@ THEN("^the result is \"(.*)\"$")
 }
 ```
 
-Run cmake
+>
+> # What does this do?
+> The macros GIVEN, WHEN, and THEN will match the regular expression argument against the feature file we created. 
+> When cucumber reads the feature file it will send each line from a scenario to your cucumber-cpp application and 
+> the cucumber-cpp application will execute it. The code above **is** that cucumber-cpp application. Therefore, any
+> line in your scenario must have a matching regular expression in this application. 
+> 
+> Also note that by including cucumber-cpp (and later linking this code into cucumber-cpp's libriaries) it will create 
+> a 'wire server' that runs on a computer using TCP to talk to a cucumber client (the Ruby cucumber application). 
+> All this *magic* is done for us by the cucumber-cpp libriaries.
+>
+
+###Run cmake
 
 ```bash
 cd MyProject
@@ -437,6 +536,16 @@ Run the cucumber wire server
 ./build/StringReverserSteps 55555 &
 cucumber -s features
 ```
+
+>
+> The 55555 argument passed into StringReverserSteps application tells your 'wire server' to listen for network traffic
+> on port 55555. This port number must match the number given in the *myfeatures.wire* file we created earlier. Note that
+> you can use any valid TCP port 1..65535, however ports below 1024 are generally reserved for the operating system, and 
+> there are several ports above 1024 that are commonly used. Cucumber defaults to 3902, so you can just specifiy the default
+> if you like. 
+>
+> For more information on TCP ports, you can start here; http://en.wikipedia.org/wiki/Port_(computer_networking)
+>
 
 You output should look like this 
 ```bash
@@ -473,3 +582,15 @@ Feature: Reverse Words in a String
 15 steps (15 passed)
 0m3.128s
 ```
+
+# More Information
+Cucumber: http://cukes.info/
+Cucumber CPP: https://github.com/cucumber/cucumber-cpp
+Cucumber Book: http://pragprog.com/book/hwcuc/the-cucumber-book
+Google Test: http://code.google.com/p/googletest/
+Boost: http://www.boost.org/
+CMake: http://www.cmake.org/
+Ubuntu: http://www.ubuntu.com/
+Apt-Get How To: https://help.ubuntu.com/8.04/serverguide/apt-get.html
+Emacs: http://www.gnu.org/software/emacs/
+VIM: http://www.vim.org/
