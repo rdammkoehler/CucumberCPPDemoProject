@@ -1,6 +1,10 @@
 #What is this?
 This is a setup and build exercise for Cucumber-CPP on Ubuntu 10.04. It does not (yet) attempt to explain how to use Cucumber to do ATDD. You should be able to setup Cucumber-CPP and a simple test project using this information with little or no difficulty. 
 
+>
+> This example is _not_ intended to convey best practices for writing Gherkin
+>
+
 Soon, more stuff about what is ATDD, What is Cucumber, How does it all work? When should I do this? etc. will be added to this project.
 
 If you have any suggestions or comments, please let me know.
@@ -582,6 +586,20 @@ Feature: Reverse Words in a String
 15 steps (15 passed)
 0m3.128s
 ```
+
+# Hooks and Tags
+
+Another feature available to you when using Cucumber CPP is hooks and tags. There is a resonable example of this feature in the Cucumber CPP repository that can be found here https://github.com/cucumber/cucumber-cpp/tree/master/examples/FeatureShowcase/tag
+The short form of how this works is that there are a few macros provided for creating hooks into the step file execution. They include
+
+* BEFORE
+* AFTER
+* BEFORE("@tag")
+* AFTER("@tag")
+* AROUND_STEP("@tag")
+* AFTER_STEP("@tag")
+
+Each of these macros can be used in your step definitions to add hooks to your current definitions.
 
 # More Information
 
