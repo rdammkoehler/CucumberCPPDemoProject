@@ -602,13 +602,13 @@ The short form of how this works is that there are a few macros provided for cre
 >
 > Where I have used the @tag is a place holder for any annotation that you would add to the feature (Gherkin) file to mark a scenario with a tag. For example
 >
-'''gherkin
+```gherkin
    @live_db
    Scenario: Duplicate Record Failure
       Given the database contains a record for "Joe"
       When I create a new record for "Joe"
       Then it fails to save because of a duplicate record error 
-'''
+```
 
 Each of these macros can be used in your step definitions to add hooks to your current definitions.
 
